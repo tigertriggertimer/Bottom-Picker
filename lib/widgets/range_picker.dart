@@ -94,7 +94,7 @@ class _RangePickerState extends State<RangePicker> {
             showTimeSeparator: widget.showTimeSeperator,
             onDateChanged: (date) {
               widget.onFirstDateChanged.call(date);
-              if (this.enableRangeLinkage) {
+              if (widget.enableRangeLinkage) {
                 if (initialSecondDateTime!.isBefore(date)) {
                   widget.onSecondDateChanged.call(date);
                   setState(() {
