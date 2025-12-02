@@ -18,6 +18,7 @@ class RangePicker extends StatefulWidget {
   final double? itemExtent;
   final bool showTimeSeperator;
   final CupertinoTextThemeData? pickerThemeData;
+  final bool? disableRangeLinkage;
 
   const RangePicker({
     super.key,
@@ -37,6 +38,7 @@ class RangePicker extends StatefulWidget {
     this.itemExtent,
     this.showTimeSeperator = false,
     this.pickerThemeData,
+    this.disableRangeLinkage = false,
   });
 
   @override
@@ -92,17 +94,19 @@ class _RangePickerState extends State<RangePicker> {
             showTimeSeparator: widget.showTimeSeperator,
             onDateChanged: (date) {
               widget.onFirstDateChanged.call(date);
-              if (initialSecondDateTime!.isBefore(date)) {
-                widget.onSecondDateChanged.call(date);
-                setState(() {
-                  initialSecondDateTime = date;
-                  minSecondDateTime = date;
-                });
-              } else {
-                setState(() {
-                  minSecondDateTime = date;
-                });
-              }
+              if (this.disableRangeLinkage) {
+                if (initialSecondDateTime!.isBefore(date)) {
+                  widget.onSecondDateChanged.call(date);
+                  setState(() {
+                    initialSecondDateTime = date;
+                    minSecondDateTime = date;
+                  });
+                } else {
+                  setState(() {
+                    minSecondDateTime = date;
+                  });
+                }
+	      }
             },
             dateOrder: widget.dateOrder,
             textStyle: widget.textStyle,
