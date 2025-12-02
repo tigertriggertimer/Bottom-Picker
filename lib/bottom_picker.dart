@@ -521,7 +521,7 @@ class BottomPicker extends StatefulWidget {
     this.calendarDays = CupertinoDatePickerWidget.fullWeek,
     this.diameterRatio = 1.1,
     this.useSafeArea = false,
-    this.disableRangeLinkage = false,
+    this.enableRangeLinkage = true,
   }) {
     datePickerMode = CupertinoDatePickerMode.time;
     bottomPickerType = BottomPickerType.rangeTime;
@@ -804,7 +804,7 @@ class BottomPicker extends StatefulWidget {
   DateTime? initialFirstTime;
 
   /// 关闭时间段选择器的联动效果，减少卡顿并移除最早时间限制
-  bool? disableRangeLinkage;
+  bool enableRangeLinkage = true;
 
   ///the initial last time in the time range picker
   ///not required if null no minimum will be set in the time picker
@@ -1092,8 +1092,8 @@ class BottomPickerState extends State<BottomPicker> {
                                               widget.showTimeSeparator,
                                           pickerThemeData:
                                               widget.pickerThemeData,
-                                          disableRangeLinkage:
-                                              widget.disableRangeLinkage,
+                                          enableRangeLinkage:
+                                              widget.enableRangeLinkage,
                                         )
                                       : RangePicker(
                                           mode: CupertinoDatePickerMode.date,

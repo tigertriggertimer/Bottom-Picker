@@ -18,7 +18,7 @@ class RangePicker extends StatefulWidget {
   final double? itemExtent;
   final bool showTimeSeperator;
   final CupertinoTextThemeData? pickerThemeData;
-  final bool? disableRangeLinkage;
+  final bool enableRangeLinkage;
 
   const RangePicker({
     super.key,
@@ -38,7 +38,7 @@ class RangePicker extends StatefulWidget {
     this.itemExtent,
     this.showTimeSeperator = false,
     this.pickerThemeData,
-    this.disableRangeLinkage = false,
+    this.enableRangeLinkage = true,
   });
 
   @override
@@ -94,7 +94,7 @@ class _RangePickerState extends State<RangePicker> {
             showTimeSeparator: widget.showTimeSeperator,
             onDateChanged: (date) {
               widget.onFirstDateChanged.call(date);
-              if (this.disableRangeLinkage) {
+              if (this.enableRangeLinkage) {
                 if (initialSecondDateTime!.isBefore(date)) {
                   widget.onSecondDateChanged.call(date);
                   setState(() {
